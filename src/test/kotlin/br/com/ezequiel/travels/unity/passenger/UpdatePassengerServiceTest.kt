@@ -3,7 +3,7 @@ package br.com.ezequiel.travels.unity.passenger
 import br.com.ezequiel.travels.repository.PassengerRepository
 import br.com.ezequiel.travels.repository.entity.PassengerEntity
 import br.com.ezequiel.travels.service.passenger.UpdatePassengerService
-import br.com.ezequiel.travels.service.passenger.model.UpdatePassengerModel
+import br.com.ezequiel.travels.service.passenger.model.PassengerToUpdate
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -21,7 +21,7 @@ class UpdatePassengerServiceTest {
     @Test
     fun whenFullUpdatePassengerThenReturnUpdatedPassenger() {
         // given
-        val updatedPassenger = UpdatePassengerModel(updatedMockPassenger.id, updatedMockPassenger.name)
+        val updatedPassenger = PassengerToUpdate(updatedMockPassenger.id, updatedMockPassenger.name)
         every { passengerRepository.getById(oldMockedPassenger.id) } returns oldMockedPassenger
         every { passengerRepository.save(any()) } returns updatedMockPassenger
 

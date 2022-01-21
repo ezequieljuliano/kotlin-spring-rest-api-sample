@@ -3,7 +3,7 @@ package br.com.ezequiel.travels.unity.driver
 import br.com.ezequiel.travels.repository.DriverRepository
 import br.com.ezequiel.travels.repository.entity.DriverEntity
 import br.com.ezequiel.travels.service.driver.CreateDriverService
-import br.com.ezequiel.travels.service.driver.model.CreateDriverModel
+import br.com.ezequiel.travels.service.driver.model.DriverToCreate
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -21,7 +21,7 @@ class CreateDriverServiceTest {
     @Test
     fun whenCreateDriverThenReturnCreatedDriver() {
         // given
-        val newDriver = CreateDriverModel(mockedDriver.name, mockedDriver.birthdate)
+        val newDriver = DriverToCreate(mockedDriver.name, mockedDriver.birthdate)
         every { driverRepository.save(any()) } returns mockedDriver
 
         // when

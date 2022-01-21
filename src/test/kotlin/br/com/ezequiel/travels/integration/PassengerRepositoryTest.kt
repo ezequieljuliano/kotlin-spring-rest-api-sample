@@ -25,39 +25,39 @@ class PassengerRepositoryTest {
     @Test
     fun whenSavePassengerThenReturnSavedPassenger() {
         // given
-        val driverEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
+        val passengerEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
 
         // when
-        val result = subject.save(driverEntity)
+        val result = subject.save(passengerEntity)
 
         // then
-        Assertions.assertEquals(driverEntity.name, result.name)
+        Assertions.assertEquals(passengerEntity.name, result.name)
     }
 
     @Test
     fun whenDeleteByIdPassengerThenSuccessfullyDeletePassenger() {
         // given
-        val driverEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
-        val driverId = subject.save(driverEntity).id
+        val passengerEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
+        val passengerId = subject.save(passengerEntity).id
 
         // when
-        subject.deleteById(driverId)
+        subject.deleteById(passengerId)
 
         // then
-        Assertions.assertFalse(subject.existsById(driverId))
+        Assertions.assertFalse(subject.existsById(passengerId))
     }
 
     @Test
     fun whenGetByIdPassengerThenReturnPassenger() {
         // given
-        val driverEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
-        val driverId = subject.save(driverEntity).id
+        val passengerEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
+        val passengerId = subject.save(passengerEntity).id
 
         // when
-        val result = subject.getById(driverId)
+        val result = subject.getById(passengerId)
 
         // then
-        Assertions.assertEquals(driverId, result.id)
+        Assertions.assertEquals(passengerId, result.id)
         Assertions.assertEquals("Jon Snow", result.name)
     }
 

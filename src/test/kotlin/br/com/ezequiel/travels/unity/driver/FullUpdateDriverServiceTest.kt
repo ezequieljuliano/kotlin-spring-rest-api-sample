@@ -3,7 +3,7 @@ package br.com.ezequiel.travels.unity.driver
 import br.com.ezequiel.travels.repository.DriverRepository
 import br.com.ezequiel.travels.repository.entity.DriverEntity
 import br.com.ezequiel.travels.service.driver.FullUpdateDriverService
-import br.com.ezequiel.travels.service.driver.model.FullUpdateDriverModel
+import br.com.ezequiel.travels.service.driver.model.DriverToFullUpdate
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -22,7 +22,7 @@ class FullUpdateDriverServiceTest {
     @Test
     fun whenFullUpdateDriverThenReturnUpdatedDriver() {
         // given
-        val updatedDriver = FullUpdateDriverModel(updatedMockDriver.id, updatedMockDriver.name, updatedMockDriver.birthdate)
+        val updatedDriver = DriverToFullUpdate(updatedMockDriver.id, updatedMockDriver.name, updatedMockDriver.birthdate)
         every { driverRepository.getById(oldMockedDriver.id) } returns oldMockedDriver
         every { driverRepository.save(any()) } returns updatedMockDriver
 

@@ -3,7 +3,7 @@ package br.com.ezequiel.travels.unity.passenger
 import br.com.ezequiel.travels.repository.PassengerRepository
 import br.com.ezequiel.travels.repository.entity.PassengerEntity
 import br.com.ezequiel.travels.service.passenger.CreatePassengerService
-import br.com.ezequiel.travels.service.passenger.model.CreatePassengerModel
+import br.com.ezequiel.travels.service.passenger.model.PassengerToCreate
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -20,7 +20,7 @@ class CreatePassengerServiceTest {
     @Test
     fun whenCreatePassengerThenReturnCreatedPassenger() {
         // given
-        val newPassenger = CreatePassengerModel(mockedPassenger.name)
+        val newPassenger = PassengerToCreate(mockedPassenger.name)
         every { passengerRepository.save(any()) } returns mockedPassenger
 
         // when

@@ -3,7 +3,7 @@ package br.com.ezequiel.travels.unity.driver
 import br.com.ezequiel.travels.repository.DriverRepository
 import br.com.ezequiel.travels.repository.entity.DriverEntity
 import br.com.ezequiel.travels.service.driver.PartialUpdateDriverService
-import br.com.ezequiel.travels.service.driver.model.PartialUpdateDriverModel
+import br.com.ezequiel.travels.service.driver.model.DriverToPartialUpdate
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -24,7 +24,7 @@ class PartialUpdateDriverServiceTest {
     @Test
     fun whenAllPropertiesPartialUpdateDriverThenReturnUpdatedDriver() {
         // given
-        val updatedDriver = PartialUpdateDriverModel(
+        val updatedDriver = DriverToPartialUpdate(
             updatedAllPropertiesMockDriver.id,
             updatedAllPropertiesMockDriver.name,
             updatedAllPropertiesMockDriver.birthdate
@@ -46,7 +46,7 @@ class PartialUpdateDriverServiceTest {
     @Test
     fun whenNamePartialUpdateDriverThenReturnUpdatedDriver() {
         // given
-        val updatedDriver = PartialUpdateDriverModel(
+        val updatedDriver = DriverToPartialUpdate(
             updatedNameMockDriver.id,
             updatedNameMockDriver.name,
             null
@@ -68,7 +68,7 @@ class PartialUpdateDriverServiceTest {
     @Test
     fun whenBirthdatePartialUpdateDriverThenReturnUpdatedDriver() {
         // given
-        val updatedDriver = PartialUpdateDriverModel(
+        val updatedDriver = DriverToPartialUpdate(
             updatedBirthdateMockDriver.id,
             null,
             updatedBirthdateMockDriver.birthdate
