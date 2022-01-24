@@ -1,10 +1,10 @@
-package br.com.ezequiel.travels.entrypoint.driver.output
+package br.com.ezequiel.travels.entrypoint.driver.response
 
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
 import java.util.UUID
 
-data class DriverOutput(
+data class DriverResponse(
 
     @field:Schema(description = "Driver identifier")
     val id: UUID,

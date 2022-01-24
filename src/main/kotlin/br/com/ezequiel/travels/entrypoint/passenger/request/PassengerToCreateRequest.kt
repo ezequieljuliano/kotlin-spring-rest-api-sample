@@ -1,10 +1,10 @@
-package br.com.ezequiel.travels.entrypoint.passenger.input
+package br.com.ezequiel.travels.entrypoint.passenger.request
 
 import io.swagger.v3.oas.annotations.media.Schema
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
-data class PassengerToUpdateInput(
+data class PassengerToCreateRequest(
 
     @field:NotEmpty
     @field:Size(min = 5, max = 255)

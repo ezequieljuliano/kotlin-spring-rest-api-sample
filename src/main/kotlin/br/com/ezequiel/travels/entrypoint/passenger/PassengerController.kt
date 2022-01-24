@@ -1,10 +1,10 @@
 package br.com.ezequiel.travels.entrypoint.passenger
 
-import br.com.ezequiel.travels.entrypoint.passenger.input.PassengerToCreateInput
-import br.com.ezequiel.travels.entrypoint.passenger.input.PassengerToUpdateInput
+import br.com.ezequiel.travels.entrypoint.passenger.request.PassengerToCreateRequest
+import br.com.ezequiel.travels.entrypoint.passenger.request.PassengerToUpdateRequest
 import br.com.ezequiel.travels.entrypoint.passenger.mapper.toModel
 import br.com.ezequiel.travels.entrypoint.passenger.mapper.toOutput
-import br.com.ezequiel.travels.entrypoint.passenger.output.PassengerOutput
+import br.com.ezequiel.travels.entrypoint.passenger.response.PassengerResponse
 import br.com.ezequiel.travels.service.passenger.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -32,7 +32,7 @@ class PassengerController(
 
     @GetMapping
     @Operation(description = "List all available passengers")
-    fun listPassengers(): List<PassengerOutput> =
+    fun listPassengers(): List<PassengerResponse> =
         listAllPassengersService.execute().stream().map { it.toOutput() }.collect(Collectors.toList())
 
     @GetMapping("/{id}")
@@ -42,13 +42,13 @@ class PassengerController(
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create a new passenger")
-    fun createPassenger(@Valid @RequestBody passengerToCreate: PassengerToCreateInput) =
+    fun createPassenger(@Valid @RequestBody passengerToCreate: PassengerToCreateRequest) =
         createPassengerService.execute(passengerToCreate.toModel()).toOutput()
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Update a passenger by id")
-    fun updatePassenger(@PathVariable("id") id: UUID, @Valid @RequestBody passengerToUpdate: PassengerToUpdateInput) {
+    fun updatePassenger(@PathVariable("id") id: UUID, @Valid @RequestBody passengerToUpdate: PassengerToUpdateRequest) {
         fullUpdatePassengerService.execute(passengerToUpdate.toModel(id))
     }
 

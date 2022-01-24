@@ -1,4 +1,4 @@
-package br.com.ezequiel.travels.entrypoint.driver.input
+package br.com.ezequiel.travels.entrypoint.driver.request
 
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.LocalDate
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull
 import javax.validation.constraints.Past
 import javax.validation.constraints.Size
 
-data class DriverToCreateInput(
+data class DriverToCreateRequest(
 
     @field:NotEmpty
     @field:Size(min = 5, max = 255)

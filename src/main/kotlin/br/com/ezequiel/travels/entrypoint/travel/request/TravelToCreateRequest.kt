@@ -1,4 +1,4 @@
-package br.com.ezequiel.travels.entrypoint.travel.input
+package br.com.ezequiel.travels.entrypoint.travel.request
 
 import io.swagger.v3.oas.annotations.media.Schema
 import java.util.UUID
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
-data class TravelToCreateInput(
+data class TravelToCreateRequest(
 
     @field:NotEmpty
     @field:Size(min = 5, max = 255)

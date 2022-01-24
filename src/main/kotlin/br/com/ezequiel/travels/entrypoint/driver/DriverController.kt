@@ -1,11 +1,11 @@
 package br.com.ezequiel.travels.entrypoint.driver
 
-import br.com.ezequiel.travels.entrypoint.driver.input.DriverToCreateInput
-import br.com.ezequiel.travels.entrypoint.driver.input.DriverToFullUpdateInput
-import br.com.ezequiel.travels.entrypoint.driver.input.DriverToPartialUpdateInput
+import br.com.ezequiel.travels.entrypoint.driver.request.DriverToCreateRequest
+import br.com.ezequiel.travels.entrypoint.driver.request.DriverToFullUpdateRequest
+import br.com.ezequiel.travels.entrypoint.driver.request.DriverToPartialUpdateRequest
 import br.com.ezequiel.travels.entrypoint.driver.mapper.toModel
 import br.com.ezequiel.travels.entrypoint.driver.mapper.toOutput
-import br.com.ezequiel.travels.entrypoint.driver.output.DriverOutput
+import br.com.ezequiel.travels.entrypoint.driver.response.DriverResponse
 import br.com.ezequiel.travels.service.driver.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -34,7 +34,7 @@ class DriverController(
 
     @GetMapping
     @Operation(description = "List all available drivers")
-    fun listDrivers(): List<DriverOutput> =
+    fun listDrivers(): List<DriverResponse> =
         listAllDriversService.execute().stream().map { it.toOutput() }.collect(Collectors.toList())
 
     @GetMapping("/{id}")
@@ -44,20 +44,20 @@ class DriverController(
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create a new driver")
-    fun createDriver(@Valid @RequestBody driverToCreate: DriverToCreateInput) =
+    fun createDriver(@Valid @RequestBody driverToCreate: DriverToCreateRequest) =
         createDriverService.execute(driverToCreate.toModel()).toOutput()
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Update a driver by id")
-    fun fullUpdateDriver(@PathVariable("id") id: UUID, @Valid @RequestBody driverToFullUpdate: DriverToFullUpdateInput) {
+    fun fullUpdateDriver(@PathVariable("id") id: UUID, @Valid @RequestBody driverToFullUpdate: DriverToFullUpdateRequest) {
         fullUpdateDriverService.execute(driverToFullUpdate.toModel(id))
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Partially update a driver by id")
-    fun partialUpdateDriver(@PathVariable("id") id: UUID, @Valid @RequestBody driverToPartialUpdate: DriverToPartialUpdateInput) {
+    fun partialUpdateDriver(@PathVariable("id") id: UUID, @Valid @RequestBody driverToPartialUpdate: DriverToPartialUpdateRequest) {
         partialUpdateDriverService.execute(driverToPartialUpdate.toModel(id))
     }
 

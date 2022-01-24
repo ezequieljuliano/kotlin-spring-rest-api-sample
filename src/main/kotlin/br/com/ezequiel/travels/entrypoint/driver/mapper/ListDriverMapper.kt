@@ -1,9 +1,9 @@
 package br.com.ezequiel.travels.entrypoint.driver.mapper
 
-import br.com.ezequiel.travels.entrypoint.driver.output.DriverOutput
+import br.com.ezequiel.travels.entrypoint.driver.response.DriverResponse
 import br.com.ezequiel.travels.service.driver.model.Driver
 
-fun Driver.toOutput() = DriverOutput(
+fun Driver.toOutput() = DriverResponse(
 
     id = id,
     name = name,

@@ -1,9 +1,9 @@
-package br.com.ezequiel.travels.entrypoint.passenger.output
+package br.com.ezequiel.travels.entrypoint.travel.response
 
 import io.swagger.v3.oas.annotations.media.Schema
 import java.util.UUID
 
-data class PassengerOutput(
+data class TravelPassengerResponse(
 
     @field:Schema(description = "Passenger identifier")
     val id: UUID,
