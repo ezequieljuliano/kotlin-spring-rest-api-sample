@@ -21,6 +21,25 @@ This project also proposes to practice test pyramid concepts and understand how 
 * Tests (unit, integration, components/end-to-end)
 * Containers
 
+### Architecture Principles
+
+The objective was to determine a simple architectural model, following the pattern: controller -> service -> repository.
+
+The structure follows the following definition:
+
+![Architecture Principles](./images/kotlin-spring-rest-api-sample.png)
+
+The controller accesses the service generating the domain objects, the service accesses the repository generating the entity objects.
+
+Some good practices:
+- No layer access Controller
+- Service/models can only be accessed by Controller or another Service
+- Repository/entities can only be accessed by Service
+
+To make it easier, let's see a perspective of the feature of creating a passenger:
+
+![Create Passenger - Architecture Principles](./images/create-passenger-kotlin-spring-rest-api-sample.png)
+
 ### API Documentation
 The project is documented by springdoc-openapi-ui, so just access the following address:
 ```
