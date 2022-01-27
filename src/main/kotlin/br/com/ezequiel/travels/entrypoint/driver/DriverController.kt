@@ -17,11 +17,7 @@ import java.util.stream.Collectors
 import javax.validation.Valid
 
 @RestController
-@RequestMapping(
-    path = ["/drivers"],
-    produces = [MediaType.APPLICATION_JSON_VALUE],
-    consumes = [MediaType.APPLICATION_JSON_VALUE]
-)
+@RequestMapping("/drivers")
 @Tag(name = "Drivers API", description = "Manage driver data")
 class DriverController(
     private val createDriverService: CreateDriverService,
@@ -32,29 +28,29 @@ class DriverController(
     private val deleteDriverService: DeleteDriverService
 ) {
 
-    @GetMapping
+    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     @Operation(description = "List all available drivers")
     fun listDrivers(): List<DriverResponse> =
         listAllDriversService.execute().stream().map { it.toOutput() }.collect(Collectors.toList())
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
     @Operation(description = "Returns a driver by id")
     fun getDriver(@PathVariable("id") id: UUID) = getDriverService.execute(id).toOutput()
 
-    @PostMapping
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create a new driver")
     fun createDriver(@Valid @RequestBody driverToCreate: DriverToCreateRequest) =
         createDriverService.execute(driverToCreate.toModel()).toOutput()
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Update a driver by id")
     fun fullUpdateDriver(@PathVariable("id") id: UUID, @Valid @RequestBody driverToFullUpdate: DriverToFullUpdateRequest) {
         fullUpdateDriverService.execute(driverToFullUpdate.toModel(id))
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Partially update a driver by id")
     fun partialUpdateDriver(@PathVariable("id") id: UUID, @Valid @RequestBody driverToPartialUpdate: DriverToPartialUpdateRequest) {

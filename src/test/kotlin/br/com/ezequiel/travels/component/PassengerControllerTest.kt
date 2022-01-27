@@ -54,7 +54,7 @@ class PassengerControllerTest {
 
     @Test
     fun whenUpdatePassengerThenReturnStatusNoContent() {
-        val passengerId = passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Ezequiel")).id
+        val passengerId = passengerRepository.save(PassengerEntity(null, "Ezequiel")).id
         val updatePassengerJson = """{"name":"Juliano"}"""
         RestAssured
             .given()
@@ -67,7 +67,7 @@ class PassengerControllerTest {
 
     @Test
     fun whenDeletePassengerThenReturnStatusNoContent() {
-        val passengerId = passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Ezequiel")).id
+        val passengerId = passengerRepository.save(PassengerEntity(null, "Ezequiel")).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -78,7 +78,7 @@ class PassengerControllerTest {
 
     @Test
     fun whenGetPassengerThenReturnStatusOkAndResponseBody() {
-        val passengerId = passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Ezequiel")).id
+        val passengerId = passengerRepository.save(PassengerEntity(null, "Ezequiel")).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -91,7 +91,7 @@ class PassengerControllerTest {
 
     @Test
     fun whenListPassengersThenReturnStatusOkAndResponseBody() {
-        passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Ezequiel"))
+        passengerRepository.save(PassengerEntity(null, "Ezequiel"))
         RestAssured
             .given()
             .contentType(ContentType.JSON)

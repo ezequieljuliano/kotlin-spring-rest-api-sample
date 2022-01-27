@@ -15,7 +15,7 @@ data class TravelEntity(
     @field:Id
     @field:GeneratedValue
     @field:Column(columnDefinition = "uuid", name = "trv_id", updatable = false)
-    val id: UUID = UUID.randomUUID(),
+    val id: UUID?,
 
     @field:NotEmpty
     @field:Size(min = 5, max = 255)

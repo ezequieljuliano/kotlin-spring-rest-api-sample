@@ -19,11 +19,7 @@ import java.util.stream.Collectors
 import javax.validation.Valid
 
 @RestController
-@RequestMapping(
-    path = ["/travel-requests"],
-    produces = [MediaType.APPLICATION_JSON_VALUE],
-    consumes = [MediaType.APPLICATION_JSON_VALUE]
-)
+@RequestMapping("/travel-requests")
 @Tag(name = "Travel Requests API", description = "Manage travel requests data")
 class TravelRequestController(
     private val acceptTravelService: AcceptTravelService,
@@ -32,18 +28,18 @@ class TravelRequestController(
     private val refuseTravelService: RefuseTravelService
 ) {
 
-    @GetMapping("/available")
+    @GetMapping("/available", produces = [MediaType.APPLICATION_JSON_VALUE])
     @Operation(description = "List all available travel requests")
     fun listAvailableTravels(): List<TravelResponse> =
         listAvailableTravelsService.execute().stream().map { it.toOutput() }.collect(Collectors.toList())
 
-    @PostMapping
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(code = HttpStatus.CREATED)
     @Operation(description = "Create a new travel request")
     fun createTravelRequest(@Valid @RequestBody travelToCreate: TravelToCreateRequest) =
         createTravelService.execute(travelToCreate.toModel()).toOutput()
 
-    @PutMapping("/{id}/accept")
+    @PutMapping("/{id}/accept", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     @Operation(description = "Driver accept a travel request")
     fun acceptTravelRequest(@PathVariable("id") id: UUID, @Valid @RequestBody travelDriver: TravelDriverRequest) {

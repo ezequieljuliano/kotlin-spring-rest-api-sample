@@ -25,7 +25,7 @@ class CreateTravelServiceTest {
     fun whenCreateTravelRequestThenReturnCreatedTravel() {
         // given
         val newTravel = TravelToCreate(
-            mockedTravel.origin, mockedTravel.destination, mockedTravel.passenger.id
+            mockedTravel.origin, mockedTravel.destination, mockedTravel.passenger.id!!
         )
         every { passengerRepository.getById(any()) } returns mockedPassenger
         every { travelRepository.save(any()) } returns mockedTravel

@@ -25,7 +25,7 @@ class PassengerRepositoryTest {
     @Test
     fun whenSavePassengerThenReturnSavedPassenger() {
         // given
-        val passengerEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
+        val passengerEntity = PassengerEntity(null, "Jon Snow")
 
         // when
         val result = subject.save(passengerEntity)
@@ -37,8 +37,8 @@ class PassengerRepositoryTest {
     @Test
     fun whenDeleteByIdPassengerThenSuccessfullyDeletePassenger() {
         // given
-        val passengerEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
-        val passengerId = subject.save(passengerEntity).id
+        val passengerEntity = PassengerEntity(null, "Jon Snow")
+        val passengerId = subject.save(passengerEntity).id ?: throw RuntimeException("PassengerId is null")
 
         // when
         subject.deleteById(passengerId)
@@ -50,8 +50,8 @@ class PassengerRepositoryTest {
     @Test
     fun whenGetByIdPassengerThenReturnPassenger() {
         // given
-        val passengerEntity = PassengerEntity(UUID.randomUUID(), "Jon Snow")
-        val passengerId = subject.save(passengerEntity).id
+        val passengerEntity = PassengerEntity(null, "Jon Snow")
+        val passengerId = subject.save(passengerEntity).id ?: throw RuntimeException("PassengerId is null")
 
         // when
         val result = subject.getById(passengerId)
@@ -63,9 +63,11 @@ class PassengerRepositoryTest {
 
     @Test
     fun whenFindAllPassengersThenReturnAllPassengers() {
+        subject.deleteAll()
+        
         // given
-        subject.save(PassengerEntity(UUID.randomUUID(), "Jon Snow"))
-        subject.save(PassengerEntity(UUID.randomUUID(), "Arya Stark"))
+        subject.save(PassengerEntity(null, "Jon Snow"))
+        subject.save(PassengerEntity(null, "Arya Stark"))
 
         // when
         val result = subject.findAll()

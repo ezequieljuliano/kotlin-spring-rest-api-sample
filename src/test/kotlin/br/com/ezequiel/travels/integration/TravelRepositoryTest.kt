@@ -30,8 +30,8 @@ class TravelRepositoryTest {
     @Test
     fun whenSaveTravelThenReturnSavedTravel() {
         // given
-        val passengerEntity = passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Jon Snow"))
-        val travelEntity = TravelEntity(UUID.randomUUID(), "Origin", "Destination", passengerEntity)
+        val passengerEntity = passengerRepository.save(PassengerEntity(null, "Jon Snow"))
+        val travelEntity = TravelEntity(null, "Origin", "Destination", passengerEntity)
 
         // when
         val result = subject.save(travelEntity)
@@ -45,9 +45,9 @@ class TravelRepositoryTest {
     @Test
     fun whenGetByIdTravelThenReturnTravel() {
         // given
-        val passengerEntity = passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Jon Snow"))
-        val travelEntity = TravelEntity(UUID.randomUUID(), "Origin", "Destination", passengerEntity)
-        val travelId = subject.save(travelEntity).id
+        val passengerEntity = passengerRepository.save(PassengerEntity(null, "Jon Snow"))
+        val travelEntity = TravelEntity(null, "Origin", "Destination", passengerEntity)
+        val travelId = subject.save(travelEntity).id ?: throw RuntimeException("TravelId is null")
 
         // when
         val result = subject.getById(travelId)
@@ -61,10 +61,12 @@ class TravelRepositoryTest {
 
     @Test
     fun whenFindTravelsByStatusThenReturnTravelsList() {
+        subject.deleteAll()
+        
         // given
-        val passengerEntity = passengerRepository.save(PassengerEntity(UUID.randomUUID(), "Jon Snow"))
-        subject.save(TravelEntity(UUID.randomUUID(), "Origin1", "Destination1", passengerEntity))
-        subject.save(TravelEntity(UUID.randomUUID(), "Origin2", "Destination2", passengerEntity))
+        val passengerEntity = passengerRepository.save(PassengerEntity(null, "Jon Snow"))
+        subject.save(TravelEntity(null, "Origin1", "Destination1", passengerEntity))
+        subject.save(TravelEntity(null, "Origin2", "Destination2", passengerEntity))
 
         // when
         val result = subject.findAll()

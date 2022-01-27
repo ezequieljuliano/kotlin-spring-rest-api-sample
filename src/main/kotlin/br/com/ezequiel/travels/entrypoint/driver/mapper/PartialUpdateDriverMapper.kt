@@ -5,9 +5,7 @@ import br.com.ezequiel.travels.service.driver.model.DriverToPartialUpdate
 import java.util.*
 
 fun DriverToPartialUpdateRequest.toModel(id: UUID) = DriverToPartialUpdate(
-
     id = id,
     name = name,
     birthdate = birthdate
-
 )

@@ -5,9 +5,7 @@ import br.com.ezequiel.travels.service.driver.model.DriverToFullUpdate
 import java.util.*
 
 fun DriverToFullUpdateRequest.toModel(id: UUID) = DriverToFullUpdate(
-
     id = id,
     name = name,
     birthdate = birthdate
-
 )

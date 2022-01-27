@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.ActiveProfiles
 import java.time.LocalDate
-import java.util.UUID
 
 @DataJpaTest
 @ActiveProfiles("test")
@@ -26,7 +25,7 @@ class DriverRepositoryTest {
     @Test
     fun whenSaveDriverThenReturnSavedDriver() {
         // given
-        val driverEntity = DriverEntity(UUID.randomUUID(), "Jon Snow", LocalDate.MIN)
+        val driverEntity = DriverEntity(null, "Jon Snow", LocalDate.MIN)
 
         // when
         val result = subject.save(driverEntity)
@@ -39,8 +38,8 @@ class DriverRepositoryTest {
     @Test
     fun whenDeleteByIdDriverThenSuccessfullyDeleteDriver() {
         // given
-        val driverEntity = DriverEntity(UUID.randomUUID(), "Jon Snow", LocalDate.MIN)
-        val driverId = subject.save(driverEntity).id
+        val driverEntity = DriverEntity(null, "Jon Snow", LocalDate.MIN)
+        val driverId = subject.save(driverEntity).id ?: throw RuntimeException("DriverId is null")
 
         // when
         subject.deleteById(driverId)
@@ -52,8 +51,8 @@ class DriverRepositoryTest {
     @Test
     fun whenGetByIdDriverThenReturnDriver() {
         // given
-        val driverEntity = DriverEntity(UUID.randomUUID(), "Jon Snow", LocalDate.MIN)
-        val driverId = subject.save(driverEntity).id
+        val driverEntity = DriverEntity(null, "Jon Snow", LocalDate.MIN)
+        val driverId = subject.save(driverEntity).id ?: throw RuntimeException("DriverId is null")
 
         // when
         val result = subject.getById(driverId)
@@ -66,9 +65,11 @@ class DriverRepositoryTest {
 
     @Test
     fun whenFindAllDriversThenReturnAllDrivers() {
+        subject.deleteAll()
+        
         // given
-        subject.save(DriverEntity(UUID.randomUUID(), "Jon Snow", LocalDate.MIN))
-        subject.save(DriverEntity(UUID.randomUUID(), "Arya Stark", LocalDate.MIN))
+        subject.save(DriverEntity(null, "Jon Snow", LocalDate.MIN))
+        subject.save(DriverEntity(null, "Arya Stark", LocalDate.MIN))
 
         // when
         val result = subject.findAll()

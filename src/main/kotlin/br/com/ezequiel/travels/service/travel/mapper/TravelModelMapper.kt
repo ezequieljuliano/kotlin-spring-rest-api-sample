@@ -8,7 +8,7 @@ import br.com.ezequiel.travels.service.travel.model.TravelPassenger
 import br.com.ezequiel.travels.service.travel.model.TravelToCreate
 
 fun TravelToCreate.toEntity(passenger: PassengerEntity) = TravelEntity(
-
+    id = null,
     origin = origin,
     destination = destination,
     passenger = passenger
@@ -16,12 +16,10 @@ fun TravelToCreate.toEntity(passenger: PassengerEntity) = TravelEntity(
 )
 
 fun TravelEntity.toModel() = Travel(
-
-    id = id,
+    id = id!!,
     origin = origin,
     destination = destination,
-    passenger = TravelPassenger(passenger.id, passenger.name),
+    passenger = TravelPassenger(passenger.id!!, passenger.name),
     status = status,
-    driver = driver?.let { TravelDriver(it.id, it.name) }
-
+    driver = driver?.let { TravelDriver(it.id!!, it.name) }
 )
